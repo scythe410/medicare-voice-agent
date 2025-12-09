@@ -2,6 +2,39 @@ import React, { useEffect } from 'react';
 import { Settings, Clock, MapPin, Phone, Calendar, User, ArrowRight, Activity, ShieldPlus } from 'lucide-react';
 
 function App() {
+   const footerRef = React.useRef(null);
+   const [bottomOffset, setBottomOffset] = React.useState(24);
+
+   useEffect(() => {
+      const handleScroll = () => {
+         if (footerRef.current) {
+            const footerRect = footerRef.current.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // If footer is visible (top of footer is less than viewport height)
+            if (footerRect.top < viewportHeight) {
+               // Calculate how much we need to push up
+               // overlap = (viewportHeight - footerRect.top)
+               const newOffset = Math.max(24, (viewportHeight - footerRect.top) + 24);
+               setBottomOffset(newOffset);
+            } else {
+               setBottomOffset(24);
+            }
+         }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('resize', handleScroll);
+
+      // Initial check
+      handleScroll();
+
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+         window.removeEventListener('resize', handleScroll);
+      };
+   }, []);
+
    useEffect(() => {
       const script = document.createElement('script');
       script.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
@@ -60,7 +93,7 @@ function App() {
                   <div className="flex flex-col sm:flex-row gap-4 pt-4">
                      <div className="flex-1 bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-sm flex items-center gap-4">
                         <img
-                           src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100&h=100"
+                           src="/dr-neilia.png"
                            alt="Dr. Neilia"
                            className="w-12 h-12 rounded-full object-cover ring-2 ring-white"
                         />
@@ -153,11 +186,14 @@ function App() {
          </main>
 
          {/* Fixed ElevenLabs Widget at Bottom Right */}
-         <div className="fixed bottom-6 right-6 z-50">
+         <div
+            className="fixed right-6 z-50"
+            style={{ bottom: `${bottomOffset}px` }}
+         >
             <elevenlabs-convai agent-id="agent_9601kc17p3tse08t7ygb2p0b4ygm"></elevenlabs-convai>
          </div>
 
-         <footer className="w-full bg-slate-900 py-6 mt-12 relative z-10">
+         <footer ref={footerRef} className="w-full bg-slate-900 py-6 mt-12 relative z-10">
             <div className="max-w-7xl mx-auto px-6 text-center">
                <p className="text-slate-400 text-sm font-medium">© Demo By R.</p>
             </div>
