@@ -71,7 +71,7 @@ function App() {
                      </div>
 
                      <div className="flex-1 bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-sm flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                        <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
                            <Clock size={24} />
                         </div>
                         <div>
@@ -92,26 +92,31 @@ function App() {
                            <h2 className="text-2xl font-semibold text-slate-800">Talk to Dahlia</h2>
                            <p className="text-slate-600">Our AI Receptionist</p>
                         </div>
-                        <div className="bg-white/80 p-2 rounded-xl shadow-sm">
-                           <ShieldPlus className="text-blue-600" size={24} />
+                     </div>
+
+                     <div className="space-y-4">
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-4 rounded-2xl border border-white/40">
+                           <User size={18} className="text-blue-600" />
+                           <span className="font-medium">Check Doctor Availability</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-4 rounded-2xl border border-white/40">
+                           <Calendar size={18} className="text-blue-600" />
+                           <span className="font-medium">Book Appointments Instantly</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-4 rounded-2xl border border-white/40">
+                           <Clock size={18} className="text-blue-600" />
+                           <span className="font-medium">Get Clinic Opening Hours</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-4 rounded-2xl border border-white/40">
+                           <Activity size={18} className="text-blue-600" />
+                           <span className="font-medium">General Inquiries & FAQs</span>
                         </div>
                      </div>
 
-                     {/* ElevenLabs Widget Wrapper - Centered and Prominent */}
-                     <div className="flex flex-col items-center justify-center min-h-[250px] bg-gradient-to-b from-white/50 to-transparent rounded-3xl border border-white/40 mb-6 relative">
-                        <elevenlabs-convai agent-id="agent_9601kc17p3tse08t7ygb2p0b4ygm"></elevenlabs-convai>
-                        <span className="absolute bottom-6 text-sm font-medium text-slate-500 animate-pulse">Tap to speak</span>
-                     </div>
-
-                     <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-3 rounded-lg">
-                           <User size={16} />
-                           <span>Check Doctor Availability</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-3 rounded-lg">
-                           <Calendar size={16} />
-                           <span>Book Appointments Instantly</span>
-                        </div>
+                     <div className="mt-8 pt-6 border-t border-white/40">
+                        <p className="text-xs text-slate-500 leading-relaxed text-center">
+                           "Dahlia can handle multiple queries at once, ensuring you never have to wait on hold."
+                        </p>
                      </div>
                   </div>
                </div>
@@ -129,7 +134,7 @@ function App() {
                </div>
 
                <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-sm hover:shadow-md transition">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                  <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4">
                      <ShieldPlus size={20} />
                   </div>
                   <h3 className="font-semibold text-slate-800 mb-2">Insurance Accepted</h3>
@@ -137,7 +142,7 @@ function App() {
                </div>
 
                <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-sm hover:shadow-md transition">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
+                  <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4">
                      <Clock size={20} />
                   </div>
                   <h3 className="font-semibold text-slate-800 mb-2">Zero Wait Times</h3>
@@ -146,6 +151,11 @@ function App() {
             </div>
 
          </main>
+
+         {/* Fixed ElevenLabs Widget at Bottom Right */}
+         <div className="fixed bottom-6 right-6 z-50">
+            <elevenlabs-convai agent-id="agent_9601kc17p3tse08t7ygb2p0b4ygm"></elevenlabs-convai>
+         </div>
 
          <footer className="w-full bg-slate-900 py-6 mt-12 relative z-10">
             <div className="max-w-7xl mx-auto px-6 text-center">
