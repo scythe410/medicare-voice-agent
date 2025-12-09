@@ -1,27 +1,162 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Settings, Clock, MapPin, Phone, Calendar, User, ArrowRight, Activity, ShieldPlus } from 'lucide-react';
 
 function App() {
-  useEffect(() => {
-    // Dynamically load the ElevenLabs script
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
-    script.async = true;
-    script.type = "text/javascript";
-    document.body.appendChild(script);
+   useEffect(() => {
+      const script = document.createElement('script');
+      script.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+      script.async = true;
+      script.type = "text/javascript";
+      document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    }
-  }, []);
+      return () => {
+         document.body.removeChild(script);
+      }
+   }, []);
 
-  return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center font-mono">
-      <elevenlabs-convai agent-id="agent_9601kc17p3tse08t7ygb2p0b4ygm"></elevenlabs-convai>
-      <div className="absolute bottom-10 text-gray-400 text-xs">
-        System Active
+   return (
+      <div className="min-h-screen font-sans text-slate-800 selection:bg-blue-200">
+
+         {/* Background Orbs (Fixed) */}
+         <div className="fixed top-[-20%] left-[-10%] w-[800px] h-[800px] bg-blue-400/20 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" />
+         <div className="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-400/20 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
+
+         {/* Navigation */}
+         <nav className="relative z-10 px-6 py-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto">
+            <div className="flex items-center gap-2">
+               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                  <Activity size={20} />
+               </div>
+               <span className="text-xl font-bold tracking-tight text-slate-800">Medicare<span className="text-blue-600"></span></span>
+            </div>
+            <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+               <a href="#" className="hover:text-blue-600 transition">Doctors</a>
+               <a href="#" className="hover:text-blue-600 transition">Services</a>
+               <a href="#" className="hover:text-blue-600 transition">Schedule</a>
+            </div>
+            <button className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/50 hover:bg-white/80 backdrop-blur-sm rounded-full text-sm font-semibold transition border border-white/60 shadow-sm text-slate-700">
+               <Phone size={16} />
+               <span>Emergency: 911</span>
+            </button>
+         </nav>
+
+         {/* Main Content */}
+         <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-8 md:pt-16 pb-20">
+
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+
+               {/* Left Column: Text & Booking Info */}
+               <div className="space-y-8">
+
+                  <h1 className="text-4xl md:text-6xl font-bold leading-tight text-slate-900">
+                     Modern Healthcare <br />
+                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                        Simplified.
+                     </span>
+                  </h1>
+
+                  <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
+                     Experience the future of family medicine. Book appointments precisely when you need them with our AI-powered scheduling assistant.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                     <div className="flex-1 bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-sm flex items-center gap-4">
+                        <img
+                           src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100&h=100"
+                           alt="Dr. Bennett"
+                           className="w-12 h-12 rounded-full object-cover ring-2 ring-white"
+                        />
+                        <div>
+                           <p className="text-xs text-slate-500 font-bold uppercase">Available Today</p>
+                           <p className="font-bold text-slate-800">Dr. Neilia De Silva</p>
+                        </div>
+                     </div>
+
+                     <div className="flex-1 bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-sm flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                           <Clock size={24} />
+                        </div>
+                        <div>
+                           <p className="text-xs text-slate-500 font-bold uppercase">Opening Hours</p>
+                           <p className="font-bold text-slate-800">8:00 AM - 11:00 PM</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               {/* Right Column: The "Agent" Card */}
+               <div className="relative">
+                  {/* Glass Card Container for Widget */}
+                  <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[40px] p-8 shadow-2xl relative overflow-hidden group hover:bg-white/50 transition duration-500">
+                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-purple-500" />
+
+                     <div className="flex justify-between items-start mb-8">
+                        <div>
+                           <h2 className="text-2xl font-bold text-slate-800">Talk to Dahlia</h2>
+                           <p className="text-slate-600">Our AI Receptionist</p>
+                        </div>
+                        <div className="bg-white/80 p-2 rounded-xl shadow-sm">
+                           <ShieldPlus className="text-blue-600" size={24} />
+                        </div>
+                     </div>
+
+                     {/* ElevenLabs Widget Wrapper - Centered and Prominent */}
+                     <div className="flex flex-col items-center justify-center min-h-[250px] bg-gradient-to-b from-white/50 to-transparent rounded-3xl border border-white/40 mb-6 relative">
+                        <elevenlabs-convai agent-id="agent_9601kc17p3tse08t7ygb2p0b4ygm"></elevenlabs-convai>
+                        <span className="absolute bottom-6 text-sm font-medium text-slate-500 animate-pulse">Tap to speak</span>
+                     </div>
+
+                     <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-3 rounded-lg">
+                           <User size={16} />
+                           <span>Check Doctor Availability</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-slate-600 bg-white/40 p-3 rounded-lg">
+                           <Calendar size={16} />
+                           <span>Book Appointments Instantly</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+            {/* Feature Grid (Bottom) */}
+            <div className="grid md:grid-cols-3 gap-6 mt-20">
+               <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-sm hover:shadow-md transition">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
+                     <MapPin size={20} />
+                  </div>
+                  <h3 className="font-bold text-slate-800 mb-2">Central Location</h3>
+                  <p className="text-sm text-slate-600">23 Desmond Avenue, Colombo 03<br />Parking Available.</p>
+               </div>
+
+               <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-sm hover:shadow-md transition">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                     <ShieldPlus size={20} />
+                  </div>
+                  <h3 className="font-bold text-slate-800 mb-2">Insurance Accepted</h3>
+                  <p className="text-sm text-slate-600">We accept all major isurances. Direct billing available.</p>
+               </div>
+
+               <div className="bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-sm hover:shadow-md transition">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
+                     <Clock size={20} />
+                  </div>
+                  <h3 className="font-bold text-slate-800 mb-2">Zero Wait Times</h3>
+                  <p className="text-sm text-slate-600">Our AI booking ensures gaps between appointments are optimized.</p>
+               </div>
+            </div>
+
+         </main>
+
+         <footer className="w-full bg-slate-900 py-6 mt-12 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 text-center">
+               <p className="text-slate-400 text-sm font-medium">© Demo By R.</p>
+            </div>
+         </footer>
       </div>
-    </div>
-  );
+   );
 }
 
 export default App;
