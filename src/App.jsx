@@ -9,14 +9,15 @@ function App() {
       const handleScroll = () => {
          if (footerRef.current) {
             const footerRect = footerRef.current.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
+            // Use visualViewport height if available (better for mobile keyboards/bars)
+            const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-            // If footer is visible (top of footer is less than viewport height)
+            // If footer is visible
             if (footerRect.top < viewportHeight) {
-               // Calculate how much we need to push up
-               // overlap = (viewportHeight - footerRect.top)
-               const newOffset = Math.max(24, (viewportHeight - footerRect.top) + 24);
-               setBottomOffset(newOffset);
+               // Calculate overlap
+               const overlap = viewportHeight - footerRect.top;
+               // Push up by overlap + initial margin (24px) + extra buffer (10px)
+               setBottomOffset(overlap + 34);
             } else {
                setBottomOffset(24);
             }

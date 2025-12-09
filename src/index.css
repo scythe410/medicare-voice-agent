@@ -8,6 +8,14 @@
   --font-script: 'Sacramento', cursive;
 }
 
+elevenlabs-convai::part(branding),
+elevenlabs-convai::part(watermark),
+elevenlabs-convai::part(attribution) {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 body {
   margin: 0;
   padding: 0;
